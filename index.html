@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ODIN PROJECT</title>
+    <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+        body {
+
+            min-height: 100vh;
+            font-family: 'Roboto', sans-serif;
+            background-color:#28282B;
+            
+        }
+
+        .etch-grid {
+
+            display: grid;
+            margin: auto;
+            height: 960px;
+            width: 960px;
+            gap: 2px;
+            margin-bottom: 100px;
+            margin-top: 100px;
+        }
+
+        main {
+
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr 1fr;
+            
+        }
+
+        header {
+
+            text-align: center;
+
+        }
+
+        .actions {
+
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-evenly;
+        }
+
+        .actions button {
+
+            width: 150px;
+            height: 50px;
+            border-radius: 10px;
+            border: 0;
+            font-size: 1.5rem;
+            box-shadow: 5px 10px 2px 0px #080808;
+            font-weight: 600;
+            font-family: 'Roboto', sans-serif ;
+            transition: all 100ms ease-in 50ms ;
+            background-color: #848fa5;
+            color: whitesmoke;
+        }
+
+        .actions button:hover {
+
+            transform: scale(1.1) ;
+
+        } 
+        h1 {
+            
+            color: whitesmoke;
+            text-shadow: 0 -1px 0 #fff, 0 1px 0 #2e2e2e, 0 2px 0 #2c2c2c, 0 3px 0 #2a2a2a, 0 4px 0 #282828, 0 5px 0 #262626, 0 6px 0 #242424, 0 7px 0 #222, 0 8px 0 #202020, 0 9px 0 #1e1e1e, 0 10px 0 #1c1c1c, 0 11px 0 #1a1a1a, 0 12px 0 #181818, 0 13px 0 #161616, 0 14px 0 #141414, 0 15px 0 #121212, 0 22px 30px rgb(0, 0, 0);
+        }
+        
+
+    </style>
+</head>
+<body>
+
+    <main>
+        <header>
+            <h1>ODIN ASSIGNMENT ETCH SKETCH</h1>
+        </header>
+        <div class="actions">
+            <button id="set-grid">SET GRID</button>
+            <button id="normal-mode-button">normal</button>
+            <button id="rainbow-mode-button">rainbow</button>
+        </div>
+    </main>
+    <section class="etch-grid">
+
+    </section>
+    
+</body>
+<script>
+
+const grid = document.querySelector(".etch-grid");
+const gridButton = document.querySelector("#set-grid");
+const normalButton = document.querySelector("#normal-mode-button")
+const rainbowButton = document.querySelector("#rainbow-mode-button");
+
+
+var gridWidth;
+var girdheight;
+var normalMode;
+
+
+setGrid()
+
+function setGrid(width,height) {
+
+    var prompt = window.prompt("set height and width in cells");
+    let cells = prompt * prompt;
+    let cell;
+    for(let i = 0; i < cells; i++){
+
+        cell = document.createElement("div");
+        cell.style.cssText = `background: whitesmoke;`
+        cell.addEventListener("mouseover",(e) => {
+
+            // POSSIBLY ADD IF BLOCK   
+            if(normalMode){
+            e.target.style.cssText = `background: blue;`
+            console.log("over")}
+            else{
+
+                e.target.style.cssText = ` background: rgb(${Math.round(Math.random() *365)},${Math.round(Math.random() *365)},${Math.round(Math.random() *365)})`
+
+            }
+        })
+        grid.style.cssText = ` grid-template-columns: repeat(${prompt},1fr);
+        grid-template-rows: repeat(${prompt},1fr);
+        `
+        grid.appendChild(cell);
+
+    }
+
+
+
+}
+
+function setNormalMode(){
+
+    normalMode = true;
+    
+
+}
+
+function setRainbowMode(){
+
+    normalMode = false;
+
+}
+
+
+
+gridButton.addEventListener("click", setGrid)
+normalButton.addEventListener("click",setNormalMode)
+rainbowButton.addEventListener("click",setRainbowMode);
+
+
+</script>
+</html>
